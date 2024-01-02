@@ -1,0 +1,30 @@
+
+server:
+  port: 8081
+  error:
+    include-message: always
+spring:
+  http:
+    converters:
+      preferred-json-mapper: jackson
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
+      force-request:
+        Content-Type: true
+        charset: UTF-8
+      force-response:
+        Content-Type: true
+        charset: UTF-8
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: sql12673015
+    url: jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12673015
+    password: IgQ7CjGgbn
+
+jpa:
+  hibernate:
+    dll-auto: update
+  show-sql: true
+  open-in-view: true
