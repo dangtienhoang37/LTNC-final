@@ -4,12 +4,10 @@ import com.example.demo.models.Book;
 import com.example.demo.models.ResponseObj;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.service.BookService;
-import com.example.demo.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,9 +38,25 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Book>> searchBooks(@RequestParam("ten") String ten) {
-        List<Book> books = bookService.findBooksByTen(ten);
-        return new ResponseEntity<>(books, HttpStatus.OK);
+    public ResponseEntity<?> searchBooks(@RequestParam("ten") String ten) {
+        try {
+            List<Book> books = bookService.findBooksByTen(ten);
+
+            if (books.isEmpty()) {
+                // Trả về mã trạng thái NOT_FOUND nếu không tìm thấy sách
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        new ResponseObj("Not Found", "Cannot find book with name : "+ ten, "")
+                );
+            }
+
+            return new ResponseEntity<>(books, HttpStatus.OK);
+        } catch (Exception e) {
+            // Xử lý ngoại lệ
+            e.printStackTrace(); // Hoặc log nó bằng logger
+
+            // Trả về mã trạng thái INTERNAL_SERVER_ERROR nếu có lỗi
+            return new ResponseEntity<>("Failed", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     //Inset
