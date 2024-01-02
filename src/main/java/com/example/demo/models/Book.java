@@ -1,17 +1,13 @@
 package com.example.demo.models;
 
-
-import jakarta.persistence.Id;
 import jakarta.persistence.*;
 
-import java.sql.Date;
-
 @Entity
-@Table(name ="book")
+@Table(name = "book")
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name ="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "ten")
@@ -31,7 +27,8 @@ public class Book {
 
     }
 
-    public Book(String ten, String tacGia, String viTri, String ngayXuatBan) {
+    public Book(Integer id, String ten, String tacGia, String viTri, String ngayXuatBan) {
+        this.id = id;
         this.ten = ten;
         this.tacGia = tacGia;
         this.viTri = viTri;

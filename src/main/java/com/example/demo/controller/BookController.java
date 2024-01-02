@@ -17,7 +17,7 @@ import java.util.Optional;
 public class BookController {
     @Autowired
     private BookRepository repository;
-    // dang req: http://localhost:8080/api/v1/Books
+    // dang req: http://localhost:8081/api/v1/Books
     @GetMapping("")
     List<Book> getAllBooks() {
         return repository.findAll();
@@ -47,7 +47,8 @@ public class BookController {
         return new ResponseObj("200","register Sucessfully!",book);
     }
     //update, upsert = update if found, otherwise insert
-    @PutMapping("/(id)")
+    //@PutMapping("/update/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     ResponseEntity<ResponseObj> updateBook(@RequestBody Book newBook, @PathVariable Integer id){
         Book updateBook = repository.findById(id)
                 .map(book -> {
