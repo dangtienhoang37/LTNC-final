@@ -19,9 +19,9 @@ spring:
         charset: UTF-8
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: sql12673015
-    url: jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12673015
-    password: IgQ7CjGgbn
+    username: sql12674158
+    url: jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12674158
+    password: CCBZBqGBSG
 
 jpa:
   hibernate:
