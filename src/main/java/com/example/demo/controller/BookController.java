@@ -4,10 +4,12 @@ import com.example.demo.models.Book;
 import com.example.demo.models.ResponseObj;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.service.BookService;
+import com.example.demo.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +38,13 @@ public class BookController {
             );
         }
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Book>> searchBooks(@RequestParam("ten") String ten) {
+        List<Book> books = bookService.findBooksByTen(ten);
+        return new ResponseEntity<>(books, HttpStatus.OK);
+    }
+
     //Inset
     //Postman : raw. JSON
     @Autowired
